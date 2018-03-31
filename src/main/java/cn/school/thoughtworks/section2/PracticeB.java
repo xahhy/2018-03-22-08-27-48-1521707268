@@ -10,13 +10,23 @@ public class PracticeB {
         Map<String, Integer> result = new HashMap<String, Integer>();
         for (String item :
                 collection1) {
-            if (result.get(item)==(null)) {
-                result.put(item, 1);
-            }else {
-                Integer number = result.get(item);
-                result.put(item, ++number);
+            String[] array = item.split("-");
+            if (array.length > 1) {
+                increaseNumber(result, array[0], Integer.parseInt(array[1]));
+                continue;
             }
+            increaseNumber(result, item, 1);
         }
         return result;
+    }
+
+    private void increaseNumber(Map<String, Integer> result, String item, Integer increment) {
+        if (result.get(item) == (null)) {
+            result.put(item, increment);
+        } else {
+            Integer number = result.get(item);
+            number += increment;
+            result.put(item, number);
+        }
     }
 }
